@@ -7,9 +7,9 @@
 int main()
 {
     int i=0;
-    int cport_nr=24; /* /dev/ttyUSB0 */
+    int cport_nr=25; /* /dev/ttyUSB0 */
     int bdrate=57600; /* 9600 baud */
-    
+
     char mode[]={'8','N','1',0}; // 8 data bits, no parity, 1 stop bit
   //  char str_send[2][BUF_SIZE]; // send data buffer
     unsigned char str_recv[BUF_SIZE]; // recv data buffer
@@ -21,7 +21,7 @@ int main()
         printf("Can not open comport\n");
         return(0);
     }
-    
+
     usleep(2000000);  /* waits 2000ms for stable condition */
     while(1)
     {
@@ -36,7 +36,7 @@ int main()
         i++;
         i %= 2;
         usleep(5000000);  /* sleep for 5 Second */
-        
+
     }
     return(0);
 }
