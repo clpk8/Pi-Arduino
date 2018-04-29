@@ -33,7 +33,7 @@ int main ()
         fprintf (stdout, "Unable to start wiringPi: %s\n", strerror (errno)) ;
         return 1 ;
     }
-    pthread_create(&t1, NULL, (void*)&reading,(void*)&fd);
+ //   pthread_create(&t1, NULL, (void*)&reading,(void*)&fd);
 
     char data;
     const char c = 'A';
@@ -41,11 +41,11 @@ int main ()
 
        // data = serialGetchar (fd);
 
-    for(i = 0; i < 10; i++){
+    while(1){
         serialPutchar (fd, c) ;
         printf("1");
     }
-    pthread_exit(0);
+  //  pthread_exit(0);
 
 
 serialClose(fd);
