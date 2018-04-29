@@ -24,9 +24,14 @@ int main ()
         fprintf (stdout, "Unable to start wiringPi: %s\n", strerror (errno)) ;
         return 1 ;
     }
+    char data;
+    data = serialGetchar (handle)
+    while(1){
+        data = serialGetchar (fd);
+        serialPutchar (fd, c) ;
+
+    }
     
-    unsigned char c = 'A';
-    serialPutchar (fd, c) ;
 
     
 //    nextTime = millis () + 300 ;
