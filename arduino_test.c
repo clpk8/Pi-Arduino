@@ -26,9 +26,15 @@ int main ()
     }
     char data;
     const char c = 'A';
+    
 
+    while(1){
         data = serialGetchar (fd);
         serialPutchar (fd, c) ;
+        printf("1");
+
+    }
+        
 
 
 
