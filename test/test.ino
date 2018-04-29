@@ -1,5 +1,5 @@
 void setup() {
-  Serial.begin(57600); // opens serial port, sets data rate to 57600 baud
+  Serial.begin(9600); // opens serial port, sets data rate to 57600 baud
 }
 
 void loop() {

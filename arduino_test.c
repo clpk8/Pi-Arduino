@@ -1,29 +1,57 @@
-#include <errno.h>
-#include <fcntl.h>
-#include <string.h>
-#include <termios.h>
-#include <unistd.h>
-#include <stdlib.h>
+
+
 #include <stdio.h>
-char *portname = "/dev/ttyACM0";
+#include <string.h>
+#include <errno.h>
 
-int main()
+#include <wiringPi.h>
+#include <wiringSerial.h>
+
+int main ()
 {
-    printf("HI");
-    int fd = open (portname, O_RDWR);
-    if(fd < 0){
-        printf("error");
-        //exit(-1);
+    int fd ;
+    int count ;
+    unsigned int nextTime ;
+    
+    if ((fd = serialOpen ("/dev/ttyAMA0", 9600)) < 0)
+    {
+        fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
+        return 1 ;
     }
-
-    int i;
-
-    int n;
-
-    while(1){
-        n = read(fd,&i,sizeof(i));
-        printf("The value received is%d\n",i);
-        sleep(1);
+    
+    if (wiringPiSetup () == -1)
+    {
+        fprintf (stdout, "Unable to start wiringPi: %s\n", strerror (errno)) ;
+        return 1 ;
     }
-    return(0);
+    
+    unsigned char c = 'A';
+    serialPutchar (fd, c) ;
+
+    
+//    nextTime = millis () + 300 ;
+//
+//    for (count = 0 ; count < 256 ; )
+//    {
+//        if (millis () > nextTime)
+//        {
+//            printf ("\nOut: %3d: ", count) ;
+//            fflush (stdout) ;
+//            serialPutchar (fd, count) ;
+//            nextTime += 300 ;
+//            ++count ;
+//        }
+//
+//        delay (3) ;
+//
+//        while (serialDataAvail (fd))
+//        {
+//            printf (" -> %3d", serialGetchar (fd)) ;
+//            fflush (stdout) ;
+//        }
+//    }
+    
+    printf ("\n") ;
+    return 0 ;
 }
+
