@@ -21,8 +21,8 @@ int main ()
     int count ;
     unsigned int nextTime ;
 
-    pthread_t t1;
-    if ((fd = serialOpen ("/dev/ttyACM0", 9600)) < 0)
+  //  pthread_t t1;
+    if ((fd = serialOpen ("/dev/ttyACM0", 115200)) < 0)
     {
         fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
         return 1 ;
@@ -41,13 +41,11 @@ int main ()
 
        // data = serialGetchar (fd);
 
+
+    int a = 0;
     while(1){
         serialPutchar (fd, c) ;
         printf("1");
-    }
-    int a = 0;
-    while(a == 0){
-        scanf("%d",&a);
     }
   //  pthread_exit(0);
 
