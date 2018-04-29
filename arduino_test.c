@@ -38,7 +38,7 @@ int main ()
         fprintf (stdout, "Unable to start wiringPi: %s\n", strerror (errno)) ;
         return 1 ;
     }
-    pthread_create(&t1, NULL, (void*)&reading,(void*)&fd);
+ //   pthread_create(&t1, NULL, (void*)&reading,(void*)&fd);
 
     char data;
     const char a = 'A';
