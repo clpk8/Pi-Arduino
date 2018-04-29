@@ -13,7 +13,7 @@ int main ()
     int count ;
     unsigned int nextTime ;
 
-    if ((fd = serialOpen ("/dev/ttyACM0", 9600)) < 0)
+    if ((fd = serialOpen ("/dev/ttyACM1", 9600)) < 0)
     {
         fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
         return 1 ;
@@ -26,15 +26,19 @@ int main ()
     }
     char data;
     const char c = 'A';
-    
 
-    while(1){
-        data = serialGetchar (fd);
+
+       // data = serialGetchar (fd);
+        serialPutchar (fd, c) ;
+        serialPutchar (fd, c) ;
+        serialPutchar (fd, c) ;
+        serialPutchar (fd, c) ;
+        serialPutchar (fd, c) ;
         serialPutchar (fd, c) ;
         printf("1");
 
-    }
-        
+serialClose(fd);
+
 
 
 
