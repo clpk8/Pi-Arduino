@@ -6,14 +6,22 @@
 
 #include <wiringPi.h>
 #include <wiringSerial.h>
+#include <pthread.h>
 
+void * reading(void* ptr){
+    for(i = 0; i < 20; i++){
+        printf("%c",serialGetchar(fd));
+    }
+}
 int main ()
 {
     int fd ;
     int count ;
     unsigned int nextTime ;
 
-    if ((fd = serialOpen ("/dev/ttyACM2", 9600)) < 0)
+    pthread_t t1;
+    pthread_create(&t1, NULL, reading,NULL);
+    if ((fd = serialOpen ("/dev/ttyACM0", 9600)) < 0)
     {
         fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
         return 1 ;
@@ -29,13 +37,12 @@ int main ()
     int i;
 
        // data = serialGetchar (fd);
-    for(i = 0; i < 20; i++){
-        printf("%c",serialGetchar(fd));
-    }
+
     for(i = 0; i < 10; i++){
         serialPutchar (fd, c) ;
         printf("1");
     }
+    pthread_exit(t1);
 
 
 serialClose(fd);
