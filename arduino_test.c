@@ -41,9 +41,13 @@ int main ()
 
        // data = serialGetchar (fd);
 
-    for(i = 0; i< 15; i ++){
+    while(1){
         serialPutchar (fd, c) ;
         printf("1");
+    }
+    int a = 0;
+    while(a == 0){
+        scanf("%d",&a);
     }
   //  pthread_exit(0);
 
