@@ -29,7 +29,7 @@ int main ()
 
 
        // data = serialGetchar (fd);
-    for(int i = 0; i < 50; i ++ ){
+    while(1){
         serialPutchar (fd, c) ;
         printf("1");
     }
