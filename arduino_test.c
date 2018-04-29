@@ -12,7 +12,7 @@ void reading(void* ptr){
     int *i;
     i = (int*) ptr;
     for(int i = 0; i < 20; i++){
-        printf("%c",serialGetchar(*i));
+        printf("%c",serialGetchar(i));
     }
 }
 int main ()
