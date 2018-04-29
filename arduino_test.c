@@ -9,11 +9,16 @@
 #include <pthread.h>
 
 void reading(void* ptr){
+
     int *i;
     i = (int*) ptr;
-    for(int i = 0; i < 20; i++){
-        printf("%c",serialGetchar(i));
+    
+    while (serialDataAvail (i))
+    {
+        printf (" -> %3d", serialGetchar (i)) ;
+        fflush (stdout) ;
     }
+    
 }
 int main ()
 {
@@ -21,7 +26,7 @@ int main ()
     int count ;
     unsigned int nextTime ;
 
-  //  pthread_t t1;
+    pthread_t t1;
     if ((fd = serialOpen ("/dev/ttyACM0", 9600)) < 0)
     {
         fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
@@ -33,22 +38,44 @@ int main ()
         fprintf (stdout, "Unable to start wiringPi: %s\n", strerror (errno)) ;
         return 1 ;
     }
- //   pthread_create(&t1, NULL, (void*)&reading,(void*)&fd);
+    pthread_create(&t1, NULL, (void*)&reading,(void*)&fd);
 
     char data;
-    const char c = 'A';
+    const char a = 'A';
     const char b = 'B';
+    const char c = 'C';
+    const char d = 'D';
+    const char e = 'E';
+    const char f = 'F';
+    char z;
+
     int i;
 
        // data = serialGetchar (fd);
 
-
-    int a = 0;
-    for(i = 0; i < 10; i ++){
-        serialPutchar (fd, b) ;
-        printf("1");
+    
+    while(1){
+        printf("Enter what you want to send\n");
+        scanf("%c",&z);
+        switch (z) {
+            case 'a':
+                serialPutchar (fd, a);
+            case 'b':
+                serialPutchar (fd, b);
+            case 'c':
+                serialPutchar (fd, c);
+            case 'd':
+                serialPutchar (fd, d);
+            case 'e':
+                serialPutchar (fd, e);
+            case 'f':
+                serialPutchar (fd, f);
+                break;
+                
+            default:
+                break;
+        }
     }
-  //  pthread_exit(0);
 
 
 serialClose(fd);
@@ -57,28 +84,6 @@ serialClose(fd);
 
 
 
-
-//    nextTime = millis () + 300 ;
-//
-//    for (count = 0 ; count < 256 ; )
-//    {
-//        if (millis () > nextTime)
-//        {
-//            printf ("\nOut: %3d: ", count) ;
-//            fflush (stdout) ;
-//            serialPutchar (fd, count) ;
-//            nextTime += 300 ;
-//            ++count ;
-//        }
-//
-//        delay (3) ;
-//
-//        while (serialDataAvail (fd))
-//        {
-//            printf (" -> %3d", serialGetchar (fd)) ;
-//            fflush (stdout) ;
-//        }
-//    }
 
     printf ("\n") ;
     return 0 ;
