@@ -41,7 +41,7 @@ int main ()
 
        // data = serialGetchar (fd);
 
-    while(1){
+    for(i = 0; i< 15; i ++){
         serialPutchar (fd, c) ;
         printf("1");
     }
