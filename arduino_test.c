@@ -9,8 +9,9 @@
 #include <pthread.h>
 
 void * reading(void* ptr){
-    for(i = 0; i < 20; i++){
-        printf("%c",serialGetchar(fd));
+    int *i = int*(ptr);
+    for(int i = 0; i < 20; i++){
+        printf("%c",serialGetchar(*i));
     }
 }
 int main ()
@@ -20,7 +21,6 @@ int main ()
     unsigned int nextTime ;
 
     pthread_t t1;
-    pthread_create(&t1, NULL, reading,NULL);
     if ((fd = serialOpen ("/dev/ttyACM0", 9600)) < 0)
     {
         fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
@@ -32,6 +32,8 @@ int main ()
         fprintf (stdout, "Unable to start wiringPi: %s\n", strerror (errno)) ;
         return 1 ;
     }
+    pthread_create(&t1, NULL, reading,(void*)fd);
+
     char data;
     const char c = 'A';
     int i;
