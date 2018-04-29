@@ -8,8 +8,9 @@
 #include <wiringSerial.h>
 #include <pthread.h>
 
-void * reading(void* ptr){
-    int *i = int*(ptr);
+void reading(void* ptr){
+    int *i;
+    i = (int*) ptr;
     for(int i = 0; i < 20; i++){
         printf("%c",serialGetchar(*i));
     }
@@ -32,7 +33,7 @@ int main ()
         fprintf (stdout, "Unable to start wiringPi: %s\n", strerror (errno)) ;
         return 1 ;
     }
-    pthread_create(&t1, NULL, reading,(void*)fd);
+    pthread_create(&t1, NULL, (void*)&reading,(void*)&fd);
 
     char data;
     const char c = 'A';
@@ -44,7 +45,7 @@ int main ()
         serialPutchar (fd, c) ;
         printf("1");
     }
-    pthread_exit(t1);
+    pthread_exit(0);
 
 
 serialClose(fd);
