@@ -15,8 +15,8 @@ int main()
     char mode[]={'8','N','1',0}; // 8 data bits, no parity, 1 stop bit
     char str_send[2][BUF_SIZE]; // send data buffer
     unsigned char str_recv[BUF_SIZE]; // recv data buffer
-    strcpy(str_send[0], "This is a test string.");
-    strcpy(str_send[1], "This is another test string.");
+    strcpy(str_send[0], "A");
+    strcpy(str_send[1], "B");
     
     if(RS232_OpenComport(cport_nr, bdrate, mode))
     {
