@@ -44,7 +44,7 @@ int main ()
 
 
     int a = 0;
-    while(1){
+    for(i = 0; i < 10; i ++){
         serialPutchar (fd, b) ;
         printf("1");
     }
