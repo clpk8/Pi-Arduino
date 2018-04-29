@@ -29,13 +29,11 @@ int main ()
 
 
        // data = serialGetchar (fd);
-        serialPutchar (fd, c) ;
-        serialPutchar (fd, c) ;
-        serialPutchar (fd, c) ;
-        serialPutchar (fd, c) ;
-        serialPutchar (fd, c) ;
+    for(int i = 0; i < 50; i ++ ){
         serialPutchar (fd, c) ;
         printf("1");
+    }
+
 
 serialClose(fd);
 
