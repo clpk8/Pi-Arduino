@@ -99,7 +99,7 @@ int main ()
     char* error = 0;
     int rc;
     char *sql;
-    const char* data = "Called back function called";
+    const char* data1 = "Called back function called";
     
     rc = sqlite3_open("schedule.db", &db);
 
@@ -117,10 +117,10 @@ int main ()
 
     sql = "select julianday('now') - julianday(time) from schedules";
     
-    rc = sqlite3_exec(db, sql, callback, (void*)data, &error);
+    rc = sqlite3_exec(db, sql, callback, (void*)data1, &error);
     
     if( rc != SQLITE_OK ) {
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        fprintf(stderr, "SQL error: %s\n", error);
         sqlite3_free(zErrMsg);
     } else {
         fprintf(stdout, "Operation done successfully\n");
@@ -179,7 +179,7 @@ int main ()
 
 
 
-    }
+    
 
 
     printf ("\n") ;
