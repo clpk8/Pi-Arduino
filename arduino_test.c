@@ -1,6 +1,7 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
@@ -15,7 +16,7 @@ void reading(void* ptr){
 
     while(1){
         sleep(5);
-        printf (" -> %3d", fd) ;
+        printf (" -> %c", (char)serialGetchar(fd)) ;
         fflush (stdout) ;
     }
 
@@ -78,14 +79,15 @@ int main ()
             case 'f':
                 serialPutchar (fd, f);
                 break;
-
+            case 'q':
+                serialClose(fd);
+                return EXIT_FAILURE;
             default:
                 break;
         }
     }
 
 
-serialClose(fd);
 
 
 
