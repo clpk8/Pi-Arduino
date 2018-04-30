@@ -133,7 +133,7 @@ int main ()
         return EXIT_FAILURE;
     }
 
-    sql = "select task from schedules where (julianday('now','-5 hours') - julianday(time) = 0)";
+    sql = "select task from schedules where ( julianday(time) - julianday('now','-5 hours') ) * 1440 > 1 and ( julianday(time) - julianday('now','-5 hours') ) * 1440 < 0";
 
     while(1){
         rc = sqlite3_exec(db, sql, callback, (void*)data1, &error);
@@ -144,8 +144,7 @@ int main ()
         } else {
             fprintf(stdout, "Operation done successfully\n");
         }
-        sqlite3_close(db);
-        
+        sleep(10);
         
         // data = serialGetchar (fd);
         
@@ -183,6 +182,7 @@ int main ()
     }
    
 
+    sqlite3_close(db);
 
 
 
