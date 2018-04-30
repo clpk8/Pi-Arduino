@@ -121,7 +121,7 @@ int main ()
     
     if( rc != SQLITE_OK ) {
         fprintf(stderr, "SQL error: %s\n", error);
-        sqlite3_free(zErrMsg);
+        sqlite3_free(error);
     } else {
         fprintf(stdout, "Operation done successfully\n");
     }
