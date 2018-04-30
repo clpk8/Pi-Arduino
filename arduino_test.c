@@ -8,7 +8,10 @@
 #include <wiringPi.h>
 #include <wiringSerial.h>
 #include <pthread.h>
+#include <sqlite3.h>
 int fd ;
+sqlite3 *db;
+sqlite3_stmt *stmt;
 
 void reading(void* ptr){
 
@@ -80,6 +83,17 @@ int main ()
         fprintf (stdout, "Unable to start wiringPi: %s\n", strerror (errno)) ;
         return 1 ;
     }
+    
+    sqlite3_open("schedule.db", &db);
+    
+    if (db == NULL)
+    {
+        printf("Failed to open DB\n");
+        return 1;
+    }
+
+    
+
 
     char data;
     const char a = 'A';
@@ -91,13 +105,20 @@ int main ()
     char z;
 
     int i;
-
+    int num_cols;
     pthread_create(&t1, NULL, (void*)&reading,NULL);
 
        // data = serialGetchar (fd);
 
 
     while(1){
+        sqlite3_prepare_v2(db, "select julianday('now') - julianday(time) from schedules", -1, &stmt, NULL);
+        num_cols = sqlite3_column_count(stmt);
+        
+        for(i = 0; i < num_cols; i++){
+            printf("%g\n", sqlite3_column_double(stmt, i));
+        }
+
         printf("Enter what you want to send\n");
         fflush (stdout) ;
         scanf("%c",&z);
