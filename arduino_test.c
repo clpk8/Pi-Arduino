@@ -9,6 +9,7 @@
 #include <wiringSerial.h>
 #include <pthread.h>
 #include <sqlite3.h>
+#include <string.h>
 int fd ;
 
 char *event;
@@ -19,7 +20,7 @@ static int callback(void *data, int argc, char **argv, char **azColName){
     for(i = 0; i<argc; i++){
         printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
         printf("%s\n",argv[i]);
-        event = argc[i];
+        strcpy(event,argv[i]);
     }
 
     printf("\n");
