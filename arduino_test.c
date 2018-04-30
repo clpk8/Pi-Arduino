@@ -14,11 +14,11 @@ int fd ;
 static int callback(void *data, int argc, char **argv, char **azColName){
     int i;
     fprintf(stderr, "%s: ", (const char*)data);
-    
+
     for(i = 0; i<argc; i++){
         printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
     }
-    
+
     printf("\n");
     return 0;
 }
@@ -100,15 +100,15 @@ int main ()
     int rc;
     char *sql;
     const char* data1 = "Called back function called";
-    
-    rc = sqlite3_open("schedule.db", &db);
+
+    rc = sqlite3_open("db", &db);
 
     if (db == NULL)
     {
         printf("Failed to open DB\n");
         return 1;
     }
-    
+
     if (rc != SQLITE_OK){
         printf("error");
         sqlite3_close(db);
@@ -116,9 +116,9 @@ int main ()
     }
 
     sql = "select julianday('now') - julianday(time) from schedules";
-    
+
     rc = sqlite3_exec(db, sql, callback, (void*)data1, &error);
-    
+
     if( rc != SQLITE_OK ) {
         fprintf(stderr, "SQL error: %s\n", error);
         sqlite3_free(error);
@@ -179,7 +179,7 @@ int main ()
 
 
 
-    
+
 
 
     printf ("\n") ;
