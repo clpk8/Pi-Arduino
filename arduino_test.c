@@ -113,10 +113,13 @@ int main ()
 
     while(1){
         sqlite3_prepare_v2(db, "select julianday('now') - julianday(time) from schedules", -1, &stmt, NULL);
-        num_cols = sqlite3_column_count(stmt);
         
-        for(i = 0; i < num_cols; i++){
-            printf("%g\n", sqlite3_column_double(stmt, i));
+        while(sqlite3_step(stmt) != SQLITE_DONE){
+            num_cols = sqlite3_column_count(stmt);
+            printf("numcols:%d\n",num_cols);
+            for(i = 0; i < num_cols; i++){
+                printf("%g\n", sqlite3_column_double(stmt, i));
+            }
         }
 
         printf("Enter what you want to send\n");
