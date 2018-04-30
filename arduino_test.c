@@ -134,6 +134,7 @@ int main ()
         return EXIT_FAILURE;
     }
 
+    char pbuf[20] =" ";
     sql = "select task from schedules where ( julianday(time) - julianday('now','-5 hours') ) * 1440 < 1 and ( julianday(time) - julianday('now','-5 hours') ) * 1440 > -1";
 
     while(1){
@@ -150,36 +151,33 @@ int main ()
         // data = serialGetchar (fd);
         
         printf("event is %s\n",string);
- 
-            
-//            printf("Enter what you want to send\n");
-//            fflush (stdout) ;
-//            scanf("%c",&z);
-//            switch (z) {
-//                case 'a':
-//                    serialPutchar (fd, a);
-//                    break;
-//                case 'b':
-//                    serialPutchar (fd, b);
-//                    break;
-//                case 'c':
-//                    serialPutchar (fd, c);
-//                    break;
-//                case 'd':
-//                    serialPutchar (fd, d);
-//                    break;
-//                case 'e':
-//                    serialPutchar (fd, e);
-//                    break;
-//                case 'f':
-//                    serialPutchar (fd, f);
-//                    break;
-//                case 'q':
-//                    serialClose(fd);
-//                    return EXIT_FAILURE;
-//                default:
-//                    break;
-//            }
+        if(strcmp(string,pbuf) != 0){
+            strcpy(pbuf,string);
+        }
+        
+        if(strcmp(pbuf,"gotoBath") == 0){
+            serialPutchar (fd, a);
+        }
+        else if(strcmp(pbuf,"gotoBed") == 0){
+            serialPutchar (fd, a);
+        }
+        else if(strcmp(pbuf,"gotoKitchen") == 0){
+            serialPutchar (fd, a);
+        }
+        else if(strcmp(pbuf,"takeMeds") == 0){
+            serialPutchar (fd, a);
+        }
+        else if(strcmp(pbuf,"drinkWaters") == 0){
+            serialPutchar (fd, a);
+        }
+        else if(strcmp(pbuf,"wakeUp") == 0){
+            serialPutchar (fd, a);
+        }
+        else{
+            printf("pbuf is %s\n",pbuf);
+        }
+
+       
     }
    
 
