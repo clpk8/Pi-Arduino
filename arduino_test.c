@@ -133,7 +133,7 @@ int main ()
         return EXIT_FAILURE;
     }
 
-    sql = "select task from schedules where ( julianday(time) - julianday('now','-5 hours') ) * 1440 > 1 and ( julianday(time) - julianday('now','-5 hours') ) * 1440 < 0";
+    sql = "select task from schedules where ( julianday(time) - julianday('now','-5 hours') ) * 1440 < 1 and ( julianday(time) - julianday('now','-5 hours') ) * 1440 > -1";
 
     while(1){
         rc = sqlite3_exec(db, sql, callback, (void*)data1, &error);
