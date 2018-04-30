@@ -146,7 +146,7 @@ int main ()
         } else {
             fprintf(stdout, "Operation done successfully\n");
         }
-        sleep(1);
+        sleep(10);
         
         // data = serialGetchar (fd);
         
