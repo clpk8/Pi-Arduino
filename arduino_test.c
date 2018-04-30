@@ -151,7 +151,7 @@ int main ()
         // data = serialGetchar (fd);
 
         printf("event is %s\n and p buf is %d\n",string,pbuf);
-        if(strcmp(string,pbuf) != 0){
+        if(strcmp(string,pbuf) == 0){
 
             if(strcmp(pbuf,"gotoBath") == 0){
                 printf("AAAAAAAAAAAAA");
