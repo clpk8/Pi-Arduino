@@ -11,6 +11,7 @@
 #include <sqlite3.h>
 int fd ;
 
+string
 static int callback(void *data, int argc, char **argv, char **azColName){
     int i;
     fprintf(stderr, "%s: ", (const char*)data);
@@ -116,7 +117,7 @@ int main ()
         return EXIT_FAILURE;
     }
 
-    sql = "select julianday('now','-5 hours') - julianday(time) from schedules";
+    sql = "select * from schedules where julianday('now','-5 hours') - julianday(time);";
 
     rc = sqlite3_exec(db, sql, callback, (void*)data1, &error);
 
