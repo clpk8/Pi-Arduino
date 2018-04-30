@@ -115,7 +115,7 @@ int main ()
         return EXIT_FAILURE;
     }
 
-    sql = "select julianday('now') - julianday(time) from schedules";
+    sql = "select julianday('now','-5 hours') - julianday(time) from schedules";
 
     rc = sqlite3_exec(db, sql, callback, (void*)data1, &error);
 
