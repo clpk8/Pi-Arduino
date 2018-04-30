@@ -12,12 +12,34 @@ int fd ;
 
 void reading(void* ptr){
 
-
+    char command;
 
     while(1){
         sleep(5);
-        printf (" -> %c", (char)serialGetchar(fd)) ;
-        fflush (stdout) ;
+        command = (char)serialGetchar(fd);
+        //printf (" -> %c", (char)serialGetchar(fd)) ;
+        switch (command) {
+            case 'A':
+                printf("Goto bathroom");
+                break;
+            case 'B':
+                printf("Goto bedroom");
+                break;
+            case 'C':
+                printf("Goto kitchen");
+                break;
+            case 'D':
+                printf("Take meds");
+                break;
+            case 'E':
+                printf("Drink water");
+                break;
+            case 'F':
+                printf("Wakeup");
+                break;
+            default:
+                break;
+        }
     }
 
 
