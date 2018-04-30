@@ -12,7 +12,7 @@
 #include <string.h>
 int fd ;
 
-char *event;
+char string[20];
 static int callback(void *data, int argc, char **argv, char **azColName){
     int i;
     fprintf(stderr, "%s: ", (const char*)data);
@@ -20,7 +20,7 @@ static int callback(void *data, int argc, char **argv, char **azColName){
     for(i = 0; i<argc; i++){
         printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
         printf("%s\n",argv[i]);
-        event = argv[i];
+        sprintf(string,"%s",argv[i]);
        // strcpy(event,argv[i]);
     }
 
@@ -149,7 +149,7 @@ int main ()
         
         // data = serialGetchar (fd);
         
-        printf("event is %s\n",event);
+        printf("event is %s\n",string);
  
             
 //            printf("Enter what you want to send\n");
