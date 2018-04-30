@@ -83,16 +83,16 @@ int main ()
         fprintf (stdout, "Unable to start wiringPi: %s\n", strerror (errno)) ;
         return 1 ;
     }
-    
+
     sqlite3_open("schedule.db", &db);
-    
+
     if (db == NULL)
     {
         printf("Failed to open DB\n");
         return 1;
     }
 
-    
+
 
 
     char data;
@@ -114,7 +114,7 @@ int main ()
     while(1){
         sqlite3_prepare_v2(db, "select julianday('now') - julianday(time) from schedules", -1, &stmt, NULL);
         num_cols = sqlite3_column_count(stmt);
-        
+
         for(i = 0; i < num_cols; i++){
             printf("%g\n", sqlite3_column_double(stmt, i));
         }
