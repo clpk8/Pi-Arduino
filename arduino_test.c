@@ -149,9 +149,13 @@ int main ()
         sleep(10);
 
         // data = serialGetchar (fd);
+        
+        //need to be changed
 
         printf("event is %s and p buf is %s\n",string,pbuf);
-        if(strcmp(string,pbuf) == 0){
+        if(strcmp(string,pbuf) != 0){
+
+            strcpy(pbuf,string);
 
             if(strcmp(pbuf,"gotoBath") == 0){
                 printf("AAAAAAAAAAAAA");
@@ -185,7 +189,7 @@ int main ()
 
         }
         else
-            strcpy(pbuf,string);
+            printf("They are euqla\n");
 
 
 
