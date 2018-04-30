@@ -7,22 +7,23 @@
 #include <wiringPi.h>
 #include <wiringSerial.h>
 #include <pthread.h>
+int fd ;
 
 void reading(void* ptr){
 
-    int *i;
-    i = (int*) ptr;
 
-    while (serialDataAvail (&i))
-    {
-        printf (" -> %3d", serialGetchar (&i)) ;
+
+    while(1){
+        sleep(5);
+        printf (" -> %3d", fd) ;
         fflush (stdout) ;
     }
+
+    
 
 }
 int main ()
 {
-    int fd ;
     int count ;
     unsigned int nextTime ;
 
@@ -38,7 +39,6 @@ int main ()
         fprintf (stdout, "Unable to start wiringPi: %s\n", strerror (errno)) ;
         return 1 ;
     }
-    pthread_create(&t1, NULL, (void*)&reading,(void*)&fd);
 
     char data;
     const char a = 'A';
@@ -50,6 +50,8 @@ int main ()
     char z;
 
     int i;
+    
+    pthread_create(&t1, NULL, (void*)&reading,NULL);
 
        // data = serialGetchar (fd);
 
