@@ -60,14 +60,19 @@ int main ()
         switch (z) {
             case 'a':
                 serialPutchar (fd, a);
+                break;
             case 'b':
                 serialPutchar (fd, b);
+                break;
             case 'c':
                 serialPutchar (fd, c);
+                break;
             case 'd':
                 serialPutchar (fd, d);
+                break;
             case 'e':
                 serialPutchar (fd, e);
+                break;
             case 'f':
                 serialPutchar (fd, f);
                 break;
