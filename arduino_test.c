@@ -181,10 +181,12 @@ int main ()
                 printf("pbuf is %s\n",pbuf);
             }
 
-            strcpy(pbuf,string);
             printf("in side compare event is %s and p buf is %s\n",string,pbuf);
 
         }
+        else
+            strcpy(pbuf,string);
+
 
 
     }
