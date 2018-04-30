@@ -11,7 +11,7 @@
 #include <sqlite3.h>
 int fd ;
 
-string
+char *event;
 static int callback(void *data, int argc, char **argv, char **azColName){
     int i;
     fprintf(stderr, "%s: ", (const char*)data);
@@ -19,6 +19,7 @@ static int callback(void *data, int argc, char **argv, char **azColName){
     for(i = 0; i<argc; i++){
         printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
         printf("%s\n",argv[i]);
+        event = argc[i];
     }
 
     printf("\n");
@@ -97,6 +98,20 @@ int main ()
         return 1 ;
     }
 
+    
+    
+    char data;
+    const char a = 'A';
+    const char b = 'B';
+    const char c = 'C';
+    const char d = 'D';
+    const char e = 'E';
+    const char f = 'F';
+    char z;
+    
+    int i;
+    pthread_create(&t1, NULL, (void*)&reading,NULL);
+    
     sqlite3 *db;
     char* error = 0;
     int rc;
@@ -117,65 +132,55 @@ int main ()
         return EXIT_FAILURE;
     }
 
-    sql = "select * from schedules where julianday('now','-5 hours') - julianday(time);";
-
-    rc = sqlite3_exec(db, sql, callback, (void*)data1, &error);
-
-    if( rc != SQLITE_OK ) {
-        fprintf(stderr, "SQL error: %s\n", error);
-        sqlite3_free(error);
-    } else {
-        fprintf(stdout, "Operation done successfully\n");
-    }
-    sqlite3_close(db);
-
-
-    char data;
-    const char a = 'A';
-    const char b = 'B';
-    const char c = 'C';
-    const char d = 'D';
-    const char e = 'E';
-    const char f = 'F';
-    char z;
-
-    int i;
-    pthread_create(&t1, NULL, (void*)&reading,NULL);
-
-       // data = serialGetchar (fd);
-
+    sql = "select task from schedules where (julianday('now','-5 hours') - julianday(time) = 0)";
 
     while(1){
-
-        printf("Enter what you want to send\n");
-        fflush (stdout) ;
-        scanf("%c",&z);
-        switch (z) {
-            case 'a':
-                serialPutchar (fd, a);
-                break;
-            case 'b':
-                serialPutchar (fd, b);
-                break;
-            case 'c':
-                serialPutchar (fd, c);
-                break;
-            case 'd':
-                serialPutchar (fd, d);
-                break;
-            case 'e':
-                serialPutchar (fd, e);
-                break;
-            case 'f':
-                serialPutchar (fd, f);
-                break;
-            case 'q':
-                serialClose(fd);
-                return EXIT_FAILURE;
-            default:
-                break;
+        rc = sqlite3_exec(db, sql, callback, (void*)data1, &error);
+        
+        if( rc != SQLITE_OK ) {
+            fprintf(stderr, "SQL error: %s\n", error);
+            sqlite3_free(error);
+        } else {
+            fprintf(stdout, "Operation done successfully\n");
         }
+        sqlite3_close(db);
+        
+        
+        // data = serialGetchar (fd);
+        
+        printf("event is %s\n",event);
+ 
+            
+            printf("Enter what you want to send\n");
+            fflush (stdout) ;
+            scanf("%c",&z);
+            switch (z) {
+                case 'a':
+                    serialPutchar (fd, a);
+                    break;
+                case 'b':
+                    serialPutchar (fd, b);
+                    break;
+                case 'c':
+                    serialPutchar (fd, c);
+                    break;
+                case 'd':
+                    serialPutchar (fd, d);
+                    break;
+                case 'e':
+                    serialPutchar (fd, e);
+                    break;
+                case 'f':
+                    serialPutchar (fd, f);
+                    break;
+                case 'q':
+                    serialClose(fd);
+                    return EXIT_FAILURE;
+                default:
+                    break;
+            }
     }
+   
 
 
 
