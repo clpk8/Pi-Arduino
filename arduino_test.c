@@ -88,7 +88,7 @@ int main ()
     unsigned int nextTime ;
 
     pthread_t t1;
-    if ((fd = serialOpen ("/dev/ttyACM0", 9600)) < 0)
+    if ((fd = serialOpen ("/dev/ttyACM1", 9600)) < 0)
     {
         fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
         return 1 ;
@@ -152,29 +152,30 @@ int main ()
         
         printf("event is %s\n",string);
         if(strcmp(string,pbuf) != 0){
+            
+            if(strcmp(pbuf,"gotoBath") == 0){
+                serialPutchar (fd, a);
+            }
+            else if(strcmp(pbuf,"gotoBed") == 0){
+                serialPutchar (fd, a);
+            }
+            else if(strcmp(pbuf,"gotoKitchen") == 0){
+                serialPutchar (fd, a);
+            }
+            else if(strcmp(pbuf,"takeMeds") == 0){
+                serialPutchar (fd, a);
+            }
+            else if(strcmp(pbuf,"drinkWaters") == 0){
+                serialPutchar (fd, a);
+            }
+            else if(strcmp(pbuf,"wakeUp") == 0){
+                serialPutchar (fd, a);
+            }
+            else{
+                printf("pbuf is %s\n",pbuf);
+            }
+
             strcpy(pbuf,string);
-        }
-        
-        if(strcmp(pbuf,"gotoBath") == 0){
-            serialPutchar (fd, a);
-        }
-        else if(strcmp(pbuf,"gotoBed") == 0){
-            serialPutchar (fd, a);
-        }
-        else if(strcmp(pbuf,"gotoKitchen") == 0){
-            serialPutchar (fd, a);
-        }
-        else if(strcmp(pbuf,"takeMeds") == 0){
-            serialPutchar (fd, a);
-        }
-        else if(strcmp(pbuf,"drinkWaters") == 0){
-            serialPutchar (fd, a);
-        }
-        else if(strcmp(pbuf,"wakeUp") == 0){
-            serialPutchar (fd, a);
-        }
-        else{
-            printf("pbuf is %s\n",pbuf);
         }
 
        
