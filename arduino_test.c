@@ -88,7 +88,7 @@ int main ()
     unsigned int nextTime ;
 
     pthread_t t1;
-    if ((fd = serialOpen ("/dev/ttyACM1", 9600)) < 0)
+    if ((fd = serialOpen ("/dev/ttyACM2", 9600)) < 0)
     {
         fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
         return 1 ;
@@ -157,19 +157,19 @@ int main ()
                 serialPutchar (fd, a);
             }
             else if(strcmp(pbuf,"gotoBed") == 0){
-                serialPutchar (fd, a);
+                serialPutchar (fd, b);
             }
             else if(strcmp(pbuf,"gotoKitchen") == 0){
-                serialPutchar (fd, a);
+                serialPutchar (fd, c);
             }
             else if(strcmp(pbuf,"takeMeds") == 0){
-                serialPutchar (fd, a);
+                serialPutchar (fd, d);
             }
             else if(strcmp(pbuf,"drinkWaters") == 0){
-                serialPutchar (fd, a);
+                serialPutchar (fd, e);
             }
             else if(strcmp(pbuf,"wakeUp") == 0){
-                serialPutchar (fd, a);
+                serialPutchar (fd, f);
             }
             else{
                 printf("pbuf is %s\n",pbuf);
