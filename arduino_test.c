@@ -19,6 +19,7 @@ void reading(void* ptr){
         command = (char)serialGetchar(fd);
         //printf (" -> %c", (char)serialGetchar(fd)) ;
         printf("%c received",command);
+        fflush (stdout) ;
         switch (command) {
             case 'A':
                 printf("Goto bathroom");
@@ -82,6 +83,7 @@ int main ()
 
     while(1){
         printf("Enter what you want to send\n");
+        fflush (stdout) ;
         scanf("%c",&z);
         switch (z) {
             case 'a':
