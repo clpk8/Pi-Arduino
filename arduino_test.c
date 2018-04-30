@@ -88,7 +88,7 @@ int main ()
     unsigned int nextTime ;
 
     pthread_t t1;
-    if ((fd = serialOpen ("/dev/ttyACM2", 9600)) < 0)
+    if ((fd = serialOpen ("/dev/ttyACM4", 9600)) < 0)
     {
         fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
         return 1 ;
@@ -100,8 +100,8 @@ int main ()
         return 1 ;
     }
 
-    
-    
+
+
     char data;
     const char a = 'A';
     const char b = 'B';
@@ -110,10 +110,10 @@ int main ()
     const char e = 'E';
     const char f = 'F';
     char z;
-    
+
     int i;
     pthread_create(&t1, NULL, (void*)&reading,NULL);
-    
+
     sqlite3 *db;
     char* error = 0;
     int rc;
@@ -139,7 +139,7 @@ int main ()
 
     while(1){
         rc = sqlite3_exec(db, sql, callback, (void*)data1, &error);
-        
+
         if( rc != SQLITE_OK ) {
             fprintf(stderr, "SQL error: %s\n", error);
             sqlite3_free(error);
@@ -147,29 +147,35 @@ int main ()
             fprintf(stdout, "Operation done successfully\n");
         }
         sleep(10);
-        
+
         // data = serialGetchar (fd);
-        
+
         printf("event is %s\n",string);
         if(strcmp(string,pbuf) != 0){
-            
+
             if(strcmp(pbuf,"gotoBath") == 0){
+                printf("AAAAAAAAAAAAA");
                 serialPutchar (fd, a);
             }
             else if(strcmp(pbuf,"gotoBed") == 0){
                 serialPutchar (fd, b);
+                printf("BBBBBBBBBBBb");
             }
             else if(strcmp(pbuf,"gotoKitchen") == 0){
                 serialPutchar (fd, c);
+                printf("CCCCCCCCCCCCCCC");
             }
             else if(strcmp(pbuf,"takeMeds") == 0){
                 serialPutchar (fd, d);
+                printf("dddddddddddddddddd");
             }
             else if(strcmp(pbuf,"drinkWaters") == 0){
                 serialPutchar (fd, e);
+                printf("eeeeeeeeeeee");
             }
             else if(strcmp(pbuf,"wakeUp") == 0){
                 serialPutchar (fd, f);
+                printf("fffffffffff");
             }
             else{
                 printf("pbuf is %s\n",pbuf);
@@ -178,9 +184,9 @@ int main ()
             strcpy(pbuf,string);
         }
 
-       
+
     }
-   
+
 
     sqlite3_close(db);
 
