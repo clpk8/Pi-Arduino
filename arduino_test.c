@@ -150,7 +150,7 @@ int main ()
 
         // data = serialGetchar (fd);
 
-        printf("event is %s\n",string);
+        printf("event is %s\n and p buf is %d\n",string,pbuf);
         if(strcmp(string,pbuf) != 0){
 
             if(strcmp(pbuf,"gotoBath") == 0){
@@ -182,6 +182,8 @@ int main ()
             }
 
             strcpy(pbuf,string);
+            printf("in side compare event is %s\n and p buf is %d\n",string,pbuf);
+
         }
 
 
