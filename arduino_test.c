@@ -12,13 +12,13 @@ void reading(void* ptr){
 
     int *i;
     i = (int*) ptr;
-    
-    while (serialDataAvail (i))
+
+    while (serialDataAvail (&i))
     {
-        printf (" -> %3d", serialGetchar (i)) ;
+        printf (" -> %3d", serialGetchar (&i)) ;
         fflush (stdout) ;
     }
-    
+
 }
 int main ()
 {
@@ -27,7 +27,7 @@ int main ()
     unsigned int nextTime ;
 
     pthread_t t1;
-    if ((fd = serialOpen ("/dev/ttyACM0", 9600)) < 0)
+    if ((fd = serialOpen ("/dev/ttyACM2", 9600)) < 0)
     {
         fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
         return 1 ;
@@ -38,7 +38,7 @@ int main ()
         fprintf (stdout, "Unable to start wiringPi: %s\n", strerror (errno)) ;
         return 1 ;
     }
- //   pthread_create(&t1, NULL, (void*)&reading,(void*)&fd);
+    pthread_create(&t1, NULL, (void*)&reading,(void*)&fd);
 
     char data;
     const char a = 'A';
@@ -53,7 +53,7 @@ int main ()
 
        // data = serialGetchar (fd);
 
-    
+
     while(1){
         printf("Enter what you want to send\n");
         scanf("%c",&z);
@@ -76,7 +76,7 @@ int main ()
             case 'f':
                 serialPutchar (fd, f);
                 break;
-                
+
             default:
                 break;
         }
