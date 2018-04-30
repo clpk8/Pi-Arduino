@@ -15,9 +15,10 @@ void reading(void* ptr){
     char command;
 
     while(1){
-        sleep(5);
+      //  sleep(5);
         command = (char)serialGetchar(fd);
         //printf (" -> %c", (char)serialGetchar(fd)) ;
+        printf("%c received",command);
         switch (command) {
             case 'A':
                 printf("Goto bathroom");
