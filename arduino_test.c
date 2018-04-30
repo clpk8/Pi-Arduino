@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
-
+#include <unistd.h>
 #include <wiringPi.h>
 #include <wiringSerial.h>
 #include <pthread.h>
@@ -19,7 +19,7 @@ void reading(void* ptr){
         fflush (stdout) ;
     }
 
-    
+
 
 }
 int main ()
@@ -28,7 +28,7 @@ int main ()
     unsigned int nextTime ;
 
     pthread_t t1;
-    if ((fd = serialOpen ("/dev/ttyACM2", 9600)) < 0)
+    if ((fd = serialOpen ("/dev/ttyACM0", 9600)) < 0)
     {
         fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
         return 1 ;
@@ -50,7 +50,7 @@ int main ()
     char z;
 
     int i;
-    
+
     pthread_create(&t1, NULL, (void*)&reading,NULL);
 
        // data = serialGetchar (fd);
