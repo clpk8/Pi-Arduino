@@ -152,34 +152,34 @@ int main ()
         printf("event is %s\n",event);
  
             
-            printf("Enter what you want to send\n");
-            fflush (stdout) ;
-            scanf("%c",&z);
-            switch (z) {
-                case 'a':
-                    serialPutchar (fd, a);
-                    break;
-                case 'b':
-                    serialPutchar (fd, b);
-                    break;
-                case 'c':
-                    serialPutchar (fd, c);
-                    break;
-                case 'd':
-                    serialPutchar (fd, d);
-                    break;
-                case 'e':
-                    serialPutchar (fd, e);
-                    break;
-                case 'f':
-                    serialPutchar (fd, f);
-                    break;
-                case 'q':
-                    serialClose(fd);
-                    return EXIT_FAILURE;
-                default:
-                    break;
-            }
+//            printf("Enter what you want to send\n");
+//            fflush (stdout) ;
+//            scanf("%c",&z);
+//            switch (z) {
+//                case 'a':
+//                    serialPutchar (fd, a);
+//                    break;
+//                case 'b':
+//                    serialPutchar (fd, b);
+//                    break;
+//                case 'c':
+//                    serialPutchar (fd, c);
+//                    break;
+//                case 'd':
+//                    serialPutchar (fd, d);
+//                    break;
+//                case 'e':
+//                    serialPutchar (fd, e);
+//                    break;
+//                case 'f':
+//                    serialPutchar (fd, f);
+//                    break;
+//                case 'q':
+//                    serialClose(fd);
+//                    return EXIT_FAILURE;
+//                default:
+//                    break;
+//            }
     }
    
 
