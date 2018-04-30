@@ -20,26 +20,42 @@ void reading(void* ptr){
         //printf (" -> %c", (char)serialGetchar(fd)) ;
         printf("%c received",command);
         fflush (stdout) ;
+
         switch (command) {
             case 'A':
                 printf("Goto bathroom");
+                fflush (stdout) ;
+
                 break;
             case 'B':
                 printf("Goto bedroom");
+                fflush (stdout) ;
+
                 break;
             case 'C':
                 printf("Goto kitchen");
+                fflush (stdout) ;
+
                 break;
             case 'D':
                 printf("Take meds");
+                fflush (stdout) ;
+
                 break;
             case 'E':
                 printf("Drink water");
+                fflush (stdout) ;
+
                 break;
             case 'F':
                 printf("Wakeup");
+                fflush (stdout) ;
+
                 break;
             default:
+                printf("Stupid");
+                fflush (stdout) ;
+
                 break;
         }
     }
@@ -120,6 +136,8 @@ int main ()
 
 
     printf ("\n") ;
+    fflush (stdout) ;
+
     return 0 ;
 }
 
