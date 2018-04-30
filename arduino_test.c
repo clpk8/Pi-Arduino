@@ -10,8 +10,19 @@
 #include <pthread.h>
 #include <sqlite3.h>
 int fd ;
-sqlite3 *db;
-sqlite3_stmt *stmt;
+
+static int callback(void *data, int argc, char **argv, char **azColName){
+    int i;
+    fprintf(stderr, "%s: ", (const char*)data);
+    
+    for(i = 0; i<argc; i++){
+        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+    }
+    
+    printf("\n");
+    return 0;
+}
+
 
 void reading(void* ptr){
 
@@ -84,15 +95,37 @@ int main ()
         return 1 ;
     }
 
-    sqlite3_open("schedule.db", &db);
+    sqlite3 *db;
+    char* error = 0;
+    int rc;
+    char *sql;
+    const char* data = "Called back function called";
+    
+    rc = sqlite3_open("schedule.db", &db);
 
     if (db == NULL)
     {
         printf("Failed to open DB\n");
         return 1;
     }
+    
+    if (rc != SQLITE_OK){
+        printf("error");
+        sqlite3_close(db);
+        return EXIT_FAILURE;
+    }
 
-
+    sql = "select julianday('now') - julianday(time) from schedules";
+    
+    rc = sqlite3_exec(db, sql, callback, (void*)data, &error);
+    
+    if( rc != SQLITE_OK ) {
+        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        sqlite3_free(zErrMsg);
+    } else {
+        fprintf(stdout, "Operation done successfully\n");
+    }
+    sqlite3_close(db);
 
 
     char data;
@@ -105,27 +138,12 @@ int main ()
     char z;
 
     int i;
-    int num_cols;
     pthread_create(&t1, NULL, (void*)&reading,NULL);
 
        // data = serialGetchar (fd);
 
 
     while(1){
-        sqlite3_prepare_v2(db, "select julianday('now') - julianday(time) from schedules", -1, &stmt, NULL);
-        num_cols = sqlite3_column_count(stmt);
-
-        for(i = 0; i < num_cols; i++){
-            printf("%g\n", sqlite3_column_double(stmt, i));
-
-
-        while(sqlite3_step(stmt) != SQLITE_DONE){
-            num_cols = sqlite3_column_count(stmt);
-            printf("numcols:%d\n",num_cols);
-            for(i = 0; i < num_cols; i++){
-                printf("%g\n", sqlite3_column_double(stmt, i));
-            }
-        }
 
         printf("Enter what you want to send\n");
         fflush (stdout) ;
