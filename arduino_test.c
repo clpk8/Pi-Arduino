@@ -46,6 +46,7 @@ void reading(void* ptr){
                 printf("Goto bathroom");
                 sleep(5);
                 system("omxplayer -o local gotoBath.mp3");
+                sleep(5);
                 fflush (stdout) ;
                 
                 break;
@@ -53,6 +54,8 @@ void reading(void* ptr){
                 printf("Goto bedroom");
                 sleep(5);
                 system("omxplayer -o local gotoBed.mp3");
+                sleep(5);
+
                 fflush (stdout) ;
                 
                 break;
@@ -61,6 +64,8 @@ void reading(void* ptr){
                 sleep(5);
                 
                 system("omxplayer -o local gotoKitchen.mp3");
+                sleep(5);
+
                 fflush (stdout) ;
                 
                 break;
@@ -69,6 +74,8 @@ void reading(void* ptr){
                 sleep(5);
                 
                 system("omxplayer -o local takeMeds.mp3");
+                sleep(5);
+
                 fflush (stdout) ;
                 
                 break;
@@ -77,6 +84,8 @@ void reading(void* ptr){
                 sleep(5);
                 
                 system("omxplayer -o local drinkWater.mp3");
+                sleep(5);
+
                 fflush (stdout) ;
                 
                 break;
@@ -85,6 +94,8 @@ void reading(void* ptr){
                 sleep(5);
                 
                 system("omxplayer -o local wakeUp.mp3");
+                sleep(5);
+
                 fflush (stdout) ;
                 
                 break;
