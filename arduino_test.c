@@ -44,7 +44,7 @@ void reading(void* ptr){
         switch (command) {
             case 'A':
                 printf("Goto bathroom");
-                system("omxplayer -o local gotoBath.mp3");
+                system("omxplayer -o local rec_4s.mp3");
                 fflush (stdout) ;
 
                 break;
