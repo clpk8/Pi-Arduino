@@ -88,7 +88,7 @@ int main ()
     unsigned int nextTime ;
 
     pthread_t t1;
-    if ((fd = serialOpen ("/dev/ttyACM4", 9600)) < 0)
+    if ((fd = serialOpen ("/dev/ttyACM0", 9600)) < 0)
     {
         fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
         return 1 ;
@@ -149,7 +149,7 @@ int main ()
         sleep(10);
 
         // data = serialGetchar (fd);
-        
+
         //need to be changed
 
         printf("event is %s and p buf is %s\n",string,pbuf);
