@@ -105,7 +105,7 @@ int main ()
     unsigned int nextTime ;
     
     pthread_t t1;
-    if ((fd = serialOpen ("/dev/ttyACM1", 9600)) < 0)
+    if ((fd = serialOpen ("/dev/ttyACM0", 9600)) < 0)
     {
         fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
         return 1 ;
