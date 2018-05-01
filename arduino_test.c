@@ -10,6 +10,7 @@
 #include <pthread.h>
 #include <sqlite3.h>
 #include <string.h>
+#include <sys/types.h>
 int fd ;
 
 char string[20];
@@ -43,31 +44,37 @@ void reading(void* ptr){
         switch (command) {
             case 'A':
                 printf("Goto bathroom");
+                system("omxplayer -o local gotoBath.mp3");
                 fflush (stdout) ;
 
                 break;
             case 'B':
                 printf("Goto bedroom");
+                system("omxplayer -o local gotoBed.mp3");
                 fflush (stdout) ;
 
                 break;
             case 'C':
                 printf("Goto kitchen");
+                system("omxplayer -o local gotoKitchen.mp3");
                 fflush (stdout) ;
 
                 break;
             case 'D':
                 printf("Take meds");
+                system("omxplayer -o local takeMeds.mp3");
                 fflush (stdout) ;
 
                 break;
             case 'E':
                 printf("Drink water");
+                system("omxplayer -o local drinkWater.mp3");
                 fflush (stdout) ;
 
                 break;
             case 'F':
                 printf("Wakeup");
+                system("omxplayer -o local wakeUp.mp3");
                 fflush (stdout) ;
 
                 break;
