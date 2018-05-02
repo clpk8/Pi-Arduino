@@ -67,7 +67,7 @@ void reading(void* ptr){
                 fflush (stdout) ;
                 
                 break;
-            case 'D':
+            case 'E':
                 printf("Take meds");
                 system("omxplayer -o local takeMeds.mp3");
                 sleep(5);
@@ -75,7 +75,7 @@ void reading(void* ptr){
                 fflush (stdout) ;
                 
                 break;
-            case 'E':
+            case 'D':
                 printf("Drink water");
                 system("omxplayer -o local drinkWater.mp3");
                 sleep(5);
