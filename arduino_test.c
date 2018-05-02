@@ -44,20 +44,16 @@ void reading(void* ptr){
         switch (command) {
             case 'A':
                 printf("Goto bathroom");
-                sleep(5);
                 system("omxplayer -o local gotoBath.mp3");
                 sleep(5);
-                system("omxplayer -o local gotoBath.mp3");
 
                 fflush (stdout) ;
                 
                 break;
             case 'B':
                 printf("Goto bedroom");
-                sleep(5);
                 system("omxplayer -o local gotoBed.mp3");
                 sleep(5);
-                system("omxplayer -o local gotoBed.mp3");
 
 
                 fflush (stdout) ;
@@ -65,46 +61,32 @@ void reading(void* ptr){
                 break;
             case 'C':
                 printf("Goto kitchen");
-                sleep(5);
-                
                 system("omxplayer -o local gotoKitchen.mp3");
                 sleep(5);
-                system("omxplayer -o local gotoBed.mp3");
 
                 fflush (stdout) ;
                 
                 break;
             case 'D':
                 printf("Take meds");
-                sleep(5);
-                
                 system("omxplayer -o local takeMeds.mp3");
                 sleep(5);
-                system("omxplayer -o local takeMeds.mp3");
 
                 fflush (stdout) ;
                 
                 break;
             case 'E':
                 printf("Drink water");
-                sleep(5);
-                
                 system("omxplayer -o local drinkWater.mp3");
                 sleep(5);
-                system("omxplayer -o local drinkWater.mp3");
-                
-    
 
                 fflush (stdout) ;
                 
                 break;
             case 'F':
                 printf("Wakeup");
-                sleep(5);
-                
                 system("omxplayer -o local wakeUp.mp3");
                 sleep(5);
-                system("omxplayer -o local wakeUp.mp3");
 
                 fflush (stdout) ;
                 
@@ -208,11 +190,11 @@ int main ()
                 printf("CCCCCCCCCCCCCCC");
             }
             else if(strcmp(pbuf,"takeMeds") == 0){
-                serialPutchar (fd, d);
+                serialPutchar (fd, e);
                 printf("dddddddddddddddddd");
             }
             else if(strcmp(pbuf,"drinkWaters") == 0){
-                serialPutchar (fd, e);
+                serialPutchar (fd, d);
                 printf("eeeeeeeeeeee");
             }
             else if(strcmp(pbuf,"wakeUp") == 0){
