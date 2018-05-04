@@ -82,5 +82,5 @@ if __name__ == '__main__':
     loadTask()
     
     top.geometry("400x400+10+10")
-    top.title('Some kind of schedule')
+    top.title('Home Scheduler')
     top.mainloop()
