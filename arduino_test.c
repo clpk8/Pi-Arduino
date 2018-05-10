@@ -14,10 +14,13 @@
 int fd ;
 
 char string[20];
+//call back function for the database query
+//to retrice the task and location
 static int callback(void *data, int argc, char **argv, char **azColName){
     int i;
     fprintf(stderr, "%s: ", (const char*)data);
     
+    //
     for(i = 0; i<argc; i++){
         printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
         printf("%s\n",argv[i]);
@@ -36,11 +39,13 @@ void reading(void* ptr){
     
     while(1){
         //  sleep(5);
+        
+        //receive from serial
         command = (char)serialGetchar(fd);
-        //printf (" -> %c", (char)serialGetchar(fd)) ;
         printf("%c received",command);
         fflush (stdout) ;
         
+        //switch, use system call omxplayer to play audio files
         switch (command) {
             case 'A':
                 printf("Goto bathroom");
@@ -75,7 +80,7 @@ void reading(void* ptr){
                 fflush (stdout) ;
                 
                 break;
-            case 'D':
+            case 'E':
                 printf("Drink water");
                 system("omxplayer -o local drinkWater.mp3");
                 sleep(5);
@@ -107,7 +112,9 @@ int main ()
     int count ;
     unsigned int nextTime ;
     
+    //thread
     pthread_t t1;
+    //open serial port
     if ((fd = serialOpen ("/dev/ttyACM0", 9600)) < 0)
     {
         fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
@@ -121,7 +128,7 @@ int main ()
     }
     
     
-    
+    //command to be sent
     char data;
     const char a = 'A';
     const char b = 'B';
@@ -132,8 +139,9 @@ int main ()
     char z;
     
     int i;
-    pthread_create(&t1, NULL, (void*)&reading,NULL);
+    pthread_create(&t1, NULL, (void*)&reading,NULL);//create thread
     
+    //sqlite3
     sqlite3 *db;
     char* error = 0;
     int rc;
@@ -155,9 +163,13 @@ int main ()
     }
     
     char pbuf[20] =" ";
+    
+    
+    //query statement to check for the time
     sql = "select task from schedules where ( julianday(time) - julianday('now','-5 hours') ) * 1440 < 1 and ( julianday(time) - julianday('now','-5 hours') ) * 1440 > -1";
     
     while(1){
+        //checking evety 10 second
         rc = sqlite3_exec(db, sql, callback, (void*)data1, &error);
         
         if( rc != SQLITE_OK ) {
@@ -173,6 +185,8 @@ int main ()
         //need to be changed
         
         printf("event is %s and p buf is %s\n",string,pbuf);
+        
+        //act like a switch statment, state machine
         if(strcmp(string,pbuf) != 0){
             
             strcpy(pbuf,string);
@@ -210,21 +224,13 @@ int main ()
         }
         else
             printf("They are euqla\n");
-        
-        
-        
+
     }
     
-    
+    //close database
     sqlite3_close(db);
     
-    
-    
-    
-    
-    
-    
-    printf ("\n") ;
+
     fflush (stdout) ;
     
     return 0 ;
